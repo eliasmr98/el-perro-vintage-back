@@ -26,6 +26,12 @@ const usersSchema = new Schema<User>({
       ref: 'ClothingItem',
     },
   ],
+  shoppingCart: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'ClothingItem',
+    },
+  ],
   avatar: {
     publicId: String,
     size: Number,

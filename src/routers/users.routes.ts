@@ -38,3 +38,12 @@ usersRouter.patch(
   interceptor.authorization.bind(interceptor),
   controller.login.bind(controller)
 );
+usersRouter.patch(
+  '/:id',
+  fileInterceptor.singleFileStore('avatar').bind(fileInterceptor),
+  controller.update.bind(controller)
+);
+usersRouter.patch(
+  '/updateShoppingCart/:id',
+  controller.updateShoppingCart.bind(controller)
+);
