@@ -5,6 +5,7 @@ import { LoginUser, User } from '../../entities/user.js';
 import { UserModel } from './users.mongo.model.js';
 import { HttpError } from '../../types/http.error.js';
 import { Auth } from '../../services/auth.js';
+import { ObjectId } from 'mongoose';
 
 const debug = createDebug('EPV:users:mongo:repo');
 
@@ -41,6 +42,22 @@ export class UsersMongoRepo implements Repository<User> {
     const result = await UserModel.findByIdAndUpdate(id, updatedItem, {
       new: true,
     }).exec();
+    if (!result) throw new HttpError(404, 'Not Found', 'Update not possible');
+    return result;
+  }
+
+  async updateShoppingCart(userId: string, productId: string): Promise<User> {
+    console.log('user ID: ', userId);
+    console.log('product ID ', productId);
+    const result = await UserModel.findByIdAndUpdate(
+      userId,
+      {
+        $push: { shoppingCart: productId },
+      },
+      {
+        new: true,
+      }
+    ).exec();
     if (!result) throw new HttpError(404, 'Not Found', 'Update not possible');
     return result;
   }

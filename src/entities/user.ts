@@ -12,6 +12,7 @@ export type User = LoginUser & {
   surname: string;
   age: number;
   clothes: ClothingItem[];
+  shoppingCart: ClothingItem[];
   avatar: ImgData;
   role: 'Admin' | 'User';
 };

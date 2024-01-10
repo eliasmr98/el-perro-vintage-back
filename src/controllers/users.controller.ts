@@ -48,4 +48,16 @@ export class UsersController extends Controller<User> {
       next(error);
     }
   }
+
+  async updateShoppingCart(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await this.repo.updateShoppingCart(
+        req.params.id,
+        req.body.productId
+      );
+      res.json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
